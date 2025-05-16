@@ -4,7 +4,7 @@ using JobTracking.DataAccess.Data.Base;
 
 namespace JobTracking.DataAccess.Data.Models;
 
-public class Preslava : IEntity
+public class JobApplication : IEntity
 {
     [Key]
     public int Id { get; set; }
@@ -17,7 +17,7 @@ public class Preslava : IEntity
     public string? UpdatedBy { get; set; }
 
     [Required]
-    public int SthID { get; set; }
+    public int UserID { get; set; }
     
-    public virtual Sth Sth { get; set; }
+    public virtual User User { get; set; }
 }
