@@ -1,9 +1,16 @@
-﻿namespace JobTracking.API
+﻿using JobTracking.Application.Contracts;
+using JobTracking.Application.Contracts.Base;
+using JobTracking.Application.Implementations;
+using JobTracking.DataAccess.Persistance;
+
+namespace JobTracking.API
 {
     public static class ServiceConfiguratorExtensions
     {
         public static void AddContext(this WebApplicationBuilder builder)
         {
+            builder.Services.AddScoped<AppDbContext>();
+
             //builder.Services.AddDbContext<HrManagementContext>(options =>
             //{
             //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -35,6 +42,8 @@
  
         public static void AddServices(this WebApplicationBuilder builder)
         {
+            builder.Services.AddScoped<DependencyProvider>();
+            builder.Services.AddScoped<IUserService, UserService>();
             // ...
         }
  
