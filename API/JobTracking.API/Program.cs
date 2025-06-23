@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configure DbContext with In-Memory Database (for development/testing)
 // For production, uncomment the SQL Server configuration and provide a connection string.
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("JobTrackingDb"));
 // Example for SQL Server:
 // builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -79,7 +79,7 @@ var app = builder.Build();
 // Seed database with initial data on startup
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     dbContext.Database.EnsureCreated(); // Ensures the database (and thus seeding) is created
 }
 

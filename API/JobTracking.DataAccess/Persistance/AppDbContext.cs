@@ -1,16 +1,28 @@
-using JobTracking.DataAccess.Models;
+using JobTracking.DataAccess.Data.Models;
+using JobTracking.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobTracking.DataAccess.Persistance
 {
-    public class ApplicationDbContext : DbContext
+    public class AppDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<JobListing> JobListings { get; set; }
         public DbSet<Application> Applications { get; set; }
 
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                // Replace with your actual connection string
+                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=JobTrackingLocalDb;Trusted_Connection=True;");
+            }
+        }
+
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

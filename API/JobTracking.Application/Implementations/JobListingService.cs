@@ -1,19 +1,20 @@
-﻿using JobTracking.Domain.DTOs;
-using JobTracking.Application.Contracts;
-using JobTracking.DataAccess.Models;
-using JobTracking.DataAccess.Data;
+﻿using JobTracking.Application.Contracts;
+using JobTracking.DataAccess.Data.Models;
 using JobTracking.DataAccess.Persistance;
 using JobTracking.Domain.DTOs.Request;
+using JobTracking.Domain.DTOs.Request.Create;
+using JobTracking.Domain.DTOs.Request.Update;
 using JobTracking.Domain.DTOs.Response;
+using JobTracking.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobTracking.Application.Implementations
 {
     public class JobListingService : IJobListingService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
 
-        public JobListingService(ApplicationDbContext context)
+        public JobListingService(AppDbContext context)
         {
             _context = context;
         }

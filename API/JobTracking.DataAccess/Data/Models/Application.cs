@@ -1,15 +1,17 @@
-﻿namespace JobTracking.DataAccess.Models
-{
-    public enum ApplicationStatus
-    {
-        Submitted,
-        ApprovedForInterview,
-        Rejected
-    }
+﻿using JobTracking.DataAccess.Data.Base;
+using JobTracking.DataAccess.Data.Models;
+using JobTracking.Domain.Enums;
 
-    public class Application
+namespace JobTracking.DataAccess.Data.Models
+{
+    public class Application : IEntity
     {
         public int Id { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+        public string? UpdatedBy { get; set; }
         public int JobListingId { get; set; }
         public int UserId { get; set; }
         public DateTime ApplicationDate { get; set; } = DateTime.UtcNow;

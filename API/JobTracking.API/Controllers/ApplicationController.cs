@@ -1,10 +1,10 @@
-﻿using JobTracking.Domain.DTOs;
-using JobTracking.Application.Contracts;
-using JobTracking.DataAccess.Models;
+﻿using JobTracking.Application.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using JobTracking.Domain.DTOs.Request;
+using JobTracking.Domain.DTOs.Request.Create;
+using JobTracking.Domain.DTOs.Request.Update;
 using JobTracking.Domain.DTOs.Response;
 
 namespace JobTracking.API.Controllers

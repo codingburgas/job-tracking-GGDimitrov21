@@ -1,9 +1,4 @@
-﻿namespace JobTracking.Domain.DTOs.Request;
-
-public class CreateApplicationDto
-{
-    public int JobListingId { get; set; }
-}
+﻿namespace JobTracking.Domain.DTOs.Request.Update;
 
 public class UpdateApplicationStatusDto
 {

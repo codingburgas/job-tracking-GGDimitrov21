@@ -1,26 +1,24 @@
-﻿using JobTracking.Domain.DTOs;
-using JobTracking.Application.Contracts;
-using JobTracking.DataAccess.Models;
-using JobTracking.DataAccess.Data;
+﻿using JobTracking.Application.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using BCrypt.Net;
+using JobTracking.DataAccess.Data.Models;
 using JobTracking.DataAccess.Persistance;
 using JobTracking.Domain.DTOs.Request;
-using JobTracking.Domain.DTOs.Response; // For password hashing
+using JobTracking.Domain.DTOs.Response;
+using JobTracking.Domain.Enums; // For password hashing
 
 namespace JobTracking.Application.Implementations
 {
     public class AuthService : IAuthService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public AuthService(ApplicationDbContext context, IConfiguration configuration)
+        public AuthService(AppDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;

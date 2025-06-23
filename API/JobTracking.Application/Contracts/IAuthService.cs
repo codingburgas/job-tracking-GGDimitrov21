@@ -1,6 +1,4 @@
-﻿using JobTracking.Domain.DTOs;
-using JobTracking.DataAccess.Models;
-using JobTracking.Domain.DTOs.Request;
+﻿using JobTracking.Domain.DTOs.Request;
 using JobTracking.Domain.DTOs.Response;
 
 namespace JobTracking.Application.Contracts
