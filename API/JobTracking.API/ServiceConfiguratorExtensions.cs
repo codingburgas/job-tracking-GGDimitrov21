@@ -2,6 +2,7 @@
 using JobTracking.Application.Contracts.Base;
 using JobTracking.Application.Implementations;
 using JobTracking.DataAccess.Persistance;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobTracking.API
 {
@@ -9,7 +10,7 @@ namespace JobTracking.API
     {
         public static void AddContext(this WebApplicationBuilder builder)
         {
-            builder.Services.AddScoped<AppDbContext>();
+            builder.Services.AddScoped<DbContext>();
 
             //builder.Services.AddDbContext<HrManagementContext>(options =>
             //{

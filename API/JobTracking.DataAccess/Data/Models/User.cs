@@ -1,16 +1,22 @@
-using System.ComponentModel.DataAnnotations;
-using JobTracking.DataAccess.Data.Base;
-
-namespace JobTracking.DataAccess.Data.Models;
-
-public class User
+namespace JobTracking.DataAccess.Models
 {
-    [Key] public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public int Age { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
+    public enum UserRole
+    {
+        User,
+        Admin
+    }
 
-    public virtual ICollection<JobApplication> JobApplications  { get; set; } =  new List<JobApplication>();
+    public class User
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string MiddleName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
+        public string PasswordHash { get; set; } = string.Empty; // Store hashed passwords
+        public UserRole Role { get; set; }
+
+        // Navigation property for applications submitted by this user
+        public ICollection<Application> Applications { get; set; } = new List<Application>();
+    }
 }
