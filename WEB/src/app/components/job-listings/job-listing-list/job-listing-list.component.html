@@ -1,0 +1,36 @@
+﻿<div class="container mt-4">
+  <h2 class="mb-4 text-center">Available Job Listings</h2>
+
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Loading job listings...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger text-center" role="alert">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error">
+    <div *ngIf="jobListings.length === 0" class="alert alert-info text-center" role="alert">
+      No active job listings found at the moment.
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="col" *ngFor="let job of jobListings">
+        <div class="card h-100 shadow-sm rounded-lg">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title text-primary">{{ job.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ job.company }}</h6>
+            <p class="card-text flex-grow-1">{{ job.description | slice:0:100 }}<span *ngIf="job.description.length > 100">...</span></p>
+            <div class="mt-auto">
+              <p class="card-text text-end"><small class="text-muted">Published: {{ job.publishDate | date:'mediumDate' }}</small></p>
+              <button class="btn btn-outline-primary w-100 rounded-pill" (click)="viewDetails(job.id)">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

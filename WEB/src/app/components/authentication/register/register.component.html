@@ -1,0 +1,101 @@
+﻿<div class="row justify-content-center mt-5">
+  <div class="col-md-6 col-lg-5">
+    <div class="card rounded shadow-lg p-4">
+      <h2 class="card-title text-center mb-4">Register</h2>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              formControlName="firstName"
+              class="form-control rounded-pill"
+              [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+            />
+            <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+              <div *ngIf="f['firstName'].errors['required']">First Name is required</div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="middleName" class="form-label">Middle Name (Optional)</label>
+            <input
+              type="text"
+              id="middleName"
+              formControlName="middleName"
+              class="form-control rounded-pill"
+            />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            formControlName="lastName"
+            class="form-control rounded-pill"
+            [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+          />
+          <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+            <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            class="form-control rounded-pill"
+            [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+          />
+          <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+            <div *ngIf="f['username'].errors['required']">Username is required</div>
+            <div *ngIf="f['username'].errors['minlength']">Username must be at least 4 characters</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control rounded-pill"
+            [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+          />
+          <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+            <div *ngIf="f['password'].errors['required']">Password is required</div>
+            <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            class="form-control rounded-pill"
+            [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+          />
+          <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+            <div *ngIf="f['confirmPassword'].errors['required']">Confirm Password is required</div>
+            <div *ngIf="f['confirmPassword'].errors['mustMatch']">Passwords must match</div>
+          </div>
+        </div>
+        <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+        <div *ngIf="success" class="alert alert-success">Registration successful! You can now <a routerLink="/login">log in</a>.</div>
+        <button
+          type="submit"
+          class="btn btn-primary rounded-pill w-100"
+          [disabled]="loading"
+        >
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+          Register
+        </button>
+        <div class="text-center mt-3">
+          Already have an account? <a routerLink="/login">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

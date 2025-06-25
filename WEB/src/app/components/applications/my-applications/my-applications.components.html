@@ -1,0 +1,45 @@
+﻿<div class="container mt-4">
+  <h2 class="mb-4 text-center">My Job Applications</h2>
+
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Loading your applications...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger text-center" role="alert">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error">
+    <div *ngIf="myApplications.length === 0" class="alert alert-info text-center" role="alert">
+      You haven't submitted any applications yet.
+    </div>
+
+    <div class="table-responsive shadow-sm rounded-lg" *ngIf="myApplications.length > 0">
+      <table class="table table-hover align-middle">
+        <thead class="bg-light">
+        <tr>
+          <th scope="col">Job Title</th>
+          <th scope="col">Company</th>
+          <th scope="col">Application Date</th>
+          <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let app of myApplications">
+          <td>{{ app.jobTitle }}</td>
+          <td>{{ app.companyName }}</td>
+          <td>{{ app.applicationDate | date:'medium' }}</td>
+          <td>
+              <span [class]="getStatusClass(app.status)">
+                {{ app.status }}
+              </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+﻿<div class="container mt-4">
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Loading job details...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger text-center" role="alert">
+    {{ error }}
+  </div>
+
+  <div *ngIf="jobListing && !loading && !error" class="card shadow-lg rounded-lg p-4">
+    <div class="card-body">
+      <h2 class="card-title text-center text-primary mb-4">{{ jobListing.title }}</h2>
+      <h4 class="card-subtitle text-muted text-center mb-3">{{ jobListing.company }}</h4>
+      <hr>
+      <div class="mb-4">
+        <h5 class="mb-2">Job Description:</h5>
+        <p class="card-text">{{ jobListing.description }}</p>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <p class="mb-0"><small class="text-muted">Published: {{ jobListing.publishDate | date:'mediumDate' }}</small></p>
+        <span class="badge" [ngClass]="{'bg-success': jobListing.status === 'Active', 'bg-secondary': jobListing.status === 'Inactive'}">
+          {{ jobListing.status }}
+        </span>
+      </div>
+
+      <div *ngIf="isUserRole" class="mt-4 text-center">
+        <button
+          *ngIf="jobListing.status === 'Active' && !hasApplied"
+          class="btn btn-success btn-lg rounded-pill px-5 me-2"
+          (click)="applyForJob()"
+        >
+          Apply Now
+        </button>
+        <button
+          *ngIf="jobListing.status === 'Active' && hasApplied"
+          class="btn btn-warning btn-lg rounded-pill px-5 me-2"
+          disabled
+        >
+          Already Applied
+        </button>
+        <p *ngIf="jobListing.status === 'Inactive'" class="text-danger mt-3">This job listing is currently inactive and cannot be applied for.</p>
+      </div>
+
+      <div class="text-center mt-5">
+        <button class="btn btn-outline-secondary rounded-pill px-4" (click)="goBack()">Back to Job Listings</button>
+      </div>
+    </div>
+  </div>
+</div>

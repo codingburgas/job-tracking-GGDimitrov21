@@ -1,0 +1,25 @@
+﻿.modal-header {
+  border-bottom: none;
+}
+
+.modal-title {
+  font-weight: bold;
+}
+
+.btn-close-white {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.form-control.rounded-pill, .form-select.rounded-pill {
+  border-radius: 50px;
+  padding: 10px 20px;
+}
+
+.form-control.rounded {
+  border-radius: 0.5rem;
+}
+
+.btn.rounded-pill {
+  border-radius: 50px;
+  padding: 8px 15px;
+}

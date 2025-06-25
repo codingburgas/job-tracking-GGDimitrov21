@@ -1,0 +1,52 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm rounded-bottom-4">
+  <div class="container-fluid">
+    <a class="navbar-brand font-weight-bold" routerLink="/">Job Tracker</a>
+    <button class="navbar-toggler" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+            aria-controls="navbarNav" aria-expanded="!isNavbarCollapsed" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ng-container *ngIf="currentUser$ | async as currentUser">
+          <!-- Links for all authenticated users -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/job-listings" routerLinkActive="active">Job Listings</a>
+          </li>
+
+          <!-- Links for regular users -->
+          <li class="nav-item" *ngIf="isUser()">
+            <a class="nav-link" routerLink="/my-applications" routerLinkActive="active">My Applications</a>
+          </li>
+
+          <!-- Links for administrators -->
+          <li class="nav-item" *ngIf="isAdmin()">
+            <a class="nav-link" routerLink="/admin-dashboard" routerLinkActive="active">Admin Dashboard</a>
+          </li>
+        </ng-container>
+      </ul>
+
+      <ul class="navbar-nav ms-auto">
+        <ng-container *ngIf="currentUser$ | async as currentUser; else guestLinks">
+          <li class="nav-item dropdown" ngbDropdown>
+            <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Welcome, {{ currentUser.username }} ({{ currentUser.role }})
+            </a>
+            <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <!-- <li><a class="dropdown-item" routerLink="/profile">Profile</a></li> -->
+              <!-- <li><hr class="dropdown-divider"></li> -->
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            </ul>
+          </li>
+        </ng-container>
+        <ng-template #guestLinks>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+          </li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,23 @@
+﻿.navbar {
+  margin-bottom: 20px;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #fff !important; /* Ensure active link is bright */
+}
+
+.navbar-nav .nav-link {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+// Add rounded-bottom to the header itself
+.rounded-bottom-4 {
+  border-bottom-left-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+}

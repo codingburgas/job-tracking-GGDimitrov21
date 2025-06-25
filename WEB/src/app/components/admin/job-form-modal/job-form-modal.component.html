@@ -1,0 +1,51 @@
+﻿<div class="modal-header bg-primary text-white rounded-top-2">
+  <h4 class="modal-title">{{ modalTitle }}</h4>
+  <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Job Title</label>
+      <input type="text" id="title" formControlName="title" class="form-control rounded-pill"
+             [ngClass]="{ 'is-invalid': submitted && f['title'].errors }">
+      <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+        <div *ngIf="f['title'].errors['required']">Title is required</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="company" class="form-label">Company</label>
+      <input type="text" id="company" formControlName="company" class="form-control rounded-pill"
+             [ngClass]="{ 'is-invalid': submitted && f['company'].errors }">
+      <div *ngIf="submitted && f['company'].errors" class="invalid-feedback">
+        <div *ngIf="f['company'].errors['required']">Company is required</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" formControlName="description" class="form-control rounded" rows="5"
+                [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
+      <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+        <div *ngIf="f['description'].errors['required']">Description is required</div>
+      </div>
+    </div>
+    <div class="mb-3" *ngIf="jobListing">
+      <label for="status" class="form-label">Status</label>
+      <select id="status" formControlName="status" class="form-select rounded-pill"
+              [ngClass]="{ 'is-invalid': submitted && f['status'].errors }">
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+      <div *ngIf="submitted && f['status'].errors" class="invalid-feedback">
+        <div *ngIf="f['status'].errors['required']">Status is required</div>
+      </div>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary rounded-pill" (click)="cancel()" [disabled]="loading">Cancel</button>
+  <button type="submit" class="btn btn-primary rounded-pill" (click)="onSubmit()" [disabled]="loading">
+    <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+    {{ jobListing ? 'Update' : 'Create' }} Job
+  </button>
+</div>

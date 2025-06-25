@@ -1,15 +1,27 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { User } from './models/user.model';
+import { Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-root',
-    imports: [CommonModule, RouterOutlet, TranslateModule],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
-    standalone: true,
+  selector: 'app-root',
+  template: `
+    <app-header></app-header>
+    <div class="container mt-4 mb-4">
+      <router-outlet></router-outlet>
+    </div>
+  `,
+  styles: []
 })
-export class AppComponent {
-  title = 'job-training';
+export class AppComponent implements OnInit {
+  title = 'job-tracking-frontend';
+  currentUser$: Observable<User | null>;
+
+  constructor(private authService: AuthService) {
+    this.currentUser$ = this.authService.currentUser;
+  }
+
+  ngOnInit(): void {
+    // You might want to check for token expiration here or in an interceptor
+  }
 }

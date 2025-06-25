@@ -1,0 +1,28 @@
+﻿.card {
+  border: none;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-subtitle {
+  font-style: italic;
+}
+
+.badge {
+  font-size: 1em;
+  padding: 0.5em 0.8em;
+  border-radius: 0.5em;
+}
+
+.btn-lg.rounded-pill {
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+.btn-outline-secondary.rounded-pill {
+  border-radius: 50px;
+  padding: 10px 25px;
+}

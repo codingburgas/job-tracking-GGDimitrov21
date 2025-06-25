@@ -1,0 +1,42 @@
+﻿<div class="modal-header bg-primary text-white rounded-top-2">
+  <h4 class="modal-title">Update Application Status</h4>
+  <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <p><strong>Applicant:</strong> {{ application.username }}</p>
+  <p><strong>Job:</strong> {{ application.jobTitle }} at {{ application.companyName }}</p>
+  <p><strong>Current Status:</strong> <span [class]="getStatusClass(application.status)">{{ application.status }}</span></p>
+
+  <form [formGroup]="statusForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="status" class="form-label">New Status</label>
+      <select id="status" formControlName="status" class="form-select rounded-pill"
+              [ngClass]="{ 'is-invalid': submitted && f['status'].errors }">
+        <option value="Submitted">Submitted</option>
+        <option value="ApprovedForInterview">Approved for Interview</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+      <div *ngIf="submitted && f['status'].errors" class="invalid-feedback">
+        <div *ngIf="f['status'].errors['required']">Status is required</div>
+      </div>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary rounded-pill" (click)="cancel()" [disabled]="loading">Cancel</button>
+  <button type="submit" class="btn btn-primary rounded-pill" (click)="onSubmit()" [disabled]="loading">
+    <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+    Update Status
+  </button>
+</div>
+
+<style>
+  /* Local styling for badge in modal */
+  .badge {
+    padding: 0.5em 0.8em;
+    border-radius: 0.5em;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+</style>
