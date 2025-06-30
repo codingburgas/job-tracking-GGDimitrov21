@@ -1,14 +1,14 @@
-using JobTracking.DataAccess.Persistance;
+using JobTracking.DataAccess.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobTracking.Application.Contracts.Base;
 
 public class DependencyProvider
 {
-    public DependencyProvider(DbContext dbContext)
+    public DependencyProvider(AppDbContext appDbContext)
     {
-        Db = dbContext;
+        Db = appDbContext;
     }
 
-    public DbContext Db { get; set; }
+    public AppDbContext Db { get; set; }
 }

@@ -5,6 +5,7 @@ import { ApplicationService } from '../../../services/application.service';
 @Component({
   selector: 'app-my-applications',
   templateUrl: './my-applications.component.html',
+  standalone: false,
   styleUrls: ['./my-applications.component.css']
 })
 export class MyApplicationsComponent implements OnInit {

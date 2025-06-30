@@ -6,7 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using JobTracking.DataAccess.Data.Models;
-using JobTracking.DataAccess.Persistance;
+using JobTracking.DataAccess.Persistence;
 using JobTracking.Domain.DTOs.Request;
 using JobTracking.Domain.DTOs.Response;
 using JobTracking.Domain.Enums; // For password hashing

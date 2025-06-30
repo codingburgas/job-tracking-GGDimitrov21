@@ -1,89 +1,57 @@
-using JobTracking.Application.Contracts;
-using JobTracking.DataAccess.Data;
-using JobTracking.Application.Implementations;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using JobTracking.API;
 using JobTracking.Application.Contracts;
 using JobTracking.Application.Implementations;
-using JobTracking.DataAccess.Persistance;
+using JobTracking.DataAccess.Persistence;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//builder.AddIdentity();
+builder.AddServices();
 
-// Configure DbContext with In-Memory Database (for development/testing)
-// For production, uncomment the SQL Server configuration and provide a connection string.
+// Configure SQL Server DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseInMemoryDatabase("JobTrackingDb"));
-// Example for SQL Server:
-// builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+    options.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=JobTrackingLocalDb;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;"));
 
 // Register services
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IJobListingService, JobListingService>();
-builder.Services.AddScoped<IApplicationService, ApplicationService>();
+builder.AddContext();
+// builder.Services.AddScoped<IAuthService, AuthService>();
+// builder.Services.AddScoped<IJobListingService, JobListingService>();
+// builder.Services.AddScoped<IApplicationService, ApplicationService>();
+// builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configure JWT Authentication
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
-        };
-    });
-
-// Configure Authorization Policies (optional, but good practice for granular control)
+// Optional: Configure basic role-based authorization (no JWT)
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
-    options.DefaultPolicy = new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .Build();
 });
 
-// Configure CORS for Angular frontend
+// CORS for Angular frontend
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:4200") // Replace with your Angular app's URL
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
 });
 
 var app = builder.Build();
 
-// Seed database with initial data on startup
+// Seed database
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    dbContext.Database.EnsureCreated(); // Ensures the database (and thus seeding) is created
+    dbContext.Database.EnsureCreated();
 }
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -91,12 +59,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseCors(); // Use CORS policy
-
-app.UseAuthentication(); // Must be before UseAuthorization
-app.UseAuthorization();
-
+app.UseCors();
+app.UseAuthorization(); // No authentication middleware needed if not using JWT
 app.MapControllers();
-
 app.Run();

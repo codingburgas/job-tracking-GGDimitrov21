@@ -1,6 +1,6 @@
 ﻿using JobTracking.Application.Contracts;
 using JobTracking.DataAccess.Data.Models;
-using JobTracking.DataAccess.Persistance;
+using JobTracking.DataAccess.Persistence;
 using JobTracking.Domain.DTOs.Request;
 using JobTracking.Domain.DTOs.Request.Create;
 using JobTracking.Domain.DTOs.Request.Update;
@@ -65,7 +65,8 @@ namespace JobTracking.Application.Implementations
                 Company = dto.Company,
                 Description = dto.Description,
                 PublishDate = DateTime.UtcNow,
-                Status = JobStatus.Active // Default status is Active
+                Status = JobStatus.Active, // Default status is Active
+                
             };
 
             _context.JobListings.Add(newJob);

@@ -7,6 +7,7 @@ import { ApplicationStatusModalComponent } from '../application-status-modal/app
 @Component({
   selector: 'app-manage-applications',
   templateUrl: './manage-applications.component.html',
+  standalone: false,
   styleUrls: ['./manage-applications.component.css']
 })
 export class ManageApplicationsComponent implements OnInit {

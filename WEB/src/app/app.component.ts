@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
       <router-outlet></router-outlet>
     </div>
   `,
+  standalone: false,
   styles: []
 })
 export class AppComponent implements OnInit {

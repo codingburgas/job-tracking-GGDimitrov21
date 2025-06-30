@@ -5,6 +5,7 @@ import { ApplicationService } from '../../../services/application.service';
 @Component({
   selector: 'app-apply-job-modal',
   templateUrl: './apply-job-modal.component.html',
+  standalone: false,
   styleUrls: ['./apply-job-modal.component.scss']
 })
 export class ApplyJobModalComponent {

@@ -2,7 +2,7 @@ using JobTracking.DataAccess.Data.Models;
 using JobTracking.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace JobTracking.DataAccess.Persistance
+namespace JobTracking.DataAccess.Persistence
 {
     public class AppDbContext : DbContext
     {
@@ -18,7 +18,7 @@ namespace JobTracking.DataAccess.Persistance
             if (!optionsBuilder.IsConfigured)
             {
                 // Replace with your actual connection string
-                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=JobTrackingLocalDb;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=JobTrackingLocalDb;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;");
             }
         }
 

@@ -1,5 +1,5 @@
 ﻿using JobTracking.Application.Contracts;
-using JobTracking.DataAccess.Persistance;
+using JobTracking.DataAccess.Persistence;
 using JobTracking.Domain.DTOs.Request;
 using JobTracking.Domain.DTOs.Request.Create;
 using JobTracking.Domain.DTOs.Request.Update;

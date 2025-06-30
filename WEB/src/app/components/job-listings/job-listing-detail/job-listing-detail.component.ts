@@ -10,6 +10,7 @@ import { AuthService } from '../../../services/auth.service';
 @Component({
   selector: 'app-job-listing-detail',
   templateUrl: './job-listing-detail.component.html',
+  standalone: false,
   styleUrls: ['./job-listing-detail.component.css']
 })
 export class JobListingDetailComponent implements OnInit {

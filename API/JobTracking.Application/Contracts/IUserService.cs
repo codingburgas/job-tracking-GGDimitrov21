@@ -7,4 +7,8 @@ public interface IUserService
 {
     public Task<List<User>> GetAllUsers(int page, int pageCount);
     public Task<UserResponseDTO> GetUser(int userId);
+    
+    
+    Task<IEnumerable<User>> GetAllUsersAsync();
+
 }

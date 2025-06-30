@@ -6,8 +6,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Angular Bootstrap
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { RegisterComponent } from './components/auth/register/register.component';
+import { LoginComponent } from './components/authentication/login/login.component';
+import { RegisterComponent } from './components/authentication/register/register.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { JobListingListComponent } from './components/job-listings/job-listing-list/job-listing-list.component';
 import { JobListingDetailComponent } from './components/job-listings/job-listing-detail/job-listing-detail.component';

@@ -7,6 +7,7 @@ import { JobFormModalComponent } from '../job-form-modal/job-form-modal.componen
 @Component({
   selector: 'app-manage-jobs',
   templateUrl: './manage-jobs.component.html',
+  standalone: false,
   styleUrls: ['./manage-jobs.component.css']
 })
 export class ManageJobsComponent implements OnInit {

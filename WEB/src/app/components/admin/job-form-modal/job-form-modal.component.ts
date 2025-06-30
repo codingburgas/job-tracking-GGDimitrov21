@@ -7,6 +7,7 @@ import { JobListingService } from '../../../services/job-listing.service';
 @Component({
   selector: 'app-job-form-modal',
   templateUrl: './job-form-modal.component.html',
+  standalone: false,
   styleUrls: ['./job-form-modal.component.css']
 })
 export class JobFormModalComponent implements OnInit {

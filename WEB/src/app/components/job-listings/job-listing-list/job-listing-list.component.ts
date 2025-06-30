@@ -4,9 +4,10 @@ import { JobListingService } from '../../../services/job-listing.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-job-listing-list',
-  templateUrl: './job-listing-list.component.html',
-  styleUrls: ['./job-listing-list.component.css']
+    selector: 'app-job-listing-list',
+    templateUrl: './job-listing-list.component.html',
+    standalone: false,
+    styleUrls: ['./job-listing-list.component.css']
 })
 export class JobListingListComponent implements OnInit {
   jobListings: JobListing[] = [];
